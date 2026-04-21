@@ -100,10 +100,10 @@
         <span>Closed</span>
       </button>
       <div class="nav-label">SYSTEM</div>
-      <button class="nav-item disabled" disabled>
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 0 1 21 12a10 10 0 0 1-1.93 7.07M4.93 4.93A10 10 0 0 0 3 12a10 10 0 0 0 1.93 7.07"/></svg>
+      <button class="nav-item" data-filter="analytics" onclick="navAnalytics(this)">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
         <span>Analytics</span>
-        <span class="nbadge" style="background:rgba(100,100,120,.3);color:#666;font-size:8px">soon</span>
+        <span class="nbadge" style="background:rgba(0,212,170,.15);color:var(--teal);font-size:8px">NEW</span>
       </button>
     </nav>
 
@@ -167,14 +167,16 @@
     </div>
 
     <!-- CONTENT BODY -->
-    <div class="content-body">
-      <section class="ticket-section">
-        <div id="ticketList" class="ticket-list"></div>
-        <div id="pager" class="pager"></div>
-      </section>
-      <aside id="rightPanel" class="right-panel"></aside>
-    </div>
-
+    <div id="overviewContent">
+      <div class="content-body">
+        <section class="ticket-section">
+          <div id="ticketList" class="ticket-list"></div>
+          <div id="pager" class="pager"></div>
+        </section>
+        <aside id="rightPanel" class="right-panel"></aside>
+      </div>
+    </div><!-- /overviewContent -->
+    <div id="analyticsContent" style="display:none;padding:0 24px 24px"></div>
   </main>
 </div>
 
