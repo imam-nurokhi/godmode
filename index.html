@@ -3,179 +3,216 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <meta name="description" content="Nexora Support — IT Helpdesk Dashboard powered by real ticket data"/>
+  <meta name="description" content="Nexora Support — IT Helpdesk Dashboard"/>
   <title>Nexora Support · IT Helpdesk</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="assets/css/main.css"/>
 </head>
 <body>
 
-<!-- ╔══════════════════════════════╗ -->
-<!-- ║   LOADING SCREEN             ║ -->
-<!-- ╚══════════════════════════════╝ -->
+<!-- LOADING SCREEN -->
 <div id="loading-screen">
   <div class="loader-inner">
-    <div class="loader-logo">
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-        <path d="M2 17l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-        <path d="M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    <div class="loader-rings">
+      <div class="lr lr1"></div>
+      <div class="lr lr2"></div>
+      <div class="lr lr3"></div>
+    </div>
+    <div class="loader-logo-wrap">
+      <svg class="loader-icon" viewBox="0 0 32 32" fill="none">
+        <path d="M16 3L3 9.5l13 6.5 13-6.5L16 3z" stroke="url(#lg1)" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M3 22.5l13 6.5 13-6.5" stroke="url(#lg2)" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M3 16l13 6.5L29 16" stroke="url(#lg3)" stroke-width="1.8" stroke-linejoin="round"/>
+        <defs>
+          <linearGradient id="lg1" x1="3" y1="3" x2="29" y2="16"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#4f94f8"/></linearGradient>
+          <linearGradient id="lg2" x1="3" y1="22" x2="29" y2="29"><stop stop-color="#4f94f8"/><stop offset="1" stop-color="#a371f7"/></linearGradient>
+          <linearGradient id="lg3" x1="3" y1="16" x2="29" y2="22"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#a371f7"/></linearGradient>
+        </defs>
       </svg>
     </div>
-    <div class="loader-logo-text">NEXORA <span>SUPPORT</span></div>
-    <div class="loader-bar-wrap">
-      <div class="loader-bar"></div>
-    </div>
-    <div class="loader-text">Initialising dashboard…</div>
+    <div class="loader-title">NEXORA <span>SUPPORT</span></div>
+    <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+    <div class="loader-text">Loading ticket data…</div>
   </div>
 </div>
 
-<!-- ╔══════════════════════════════╗ -->
-<!-- ║   MOBILE SIDEBAR OVERLAY     ║ -->
-<!-- ╚══════════════════════════════╝ -->
-<div id="mob-sidebar-overlay" onclick="toggleSidebar()"></div>
+<!-- SIDEBAR OVERLAY (mobile) -->
+<div id="mob-overlay" onclick="toggleSidebar()"></div>
 
-<!-- ╔══════════════════════════════╗ -->
-<!-- ║   LAYOUT SHELL               ║ -->
-<!-- ╚══════════════════════════════╝ -->
+<!-- APP SHELL -->
 <div class="app-shell">
 
-  <!-- ── LEFT SIDEBAR ── -->
+  <!-- SIDEBAR -->
   <aside id="sidebar">
     <div class="sb-head">
-      <svg class="sb-logo" viewBox="0 0 24 24" fill="none">
-        <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-        <path d="M2 17l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-        <path d="M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <svg class="sb-logo" viewBox="0 0 32 32" fill="none">
+        <path d="M16 3L3 9.5l13 6.5 13-6.5L16 3z" stroke="url(#slg1)" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M3 22.5l13 6.5 13-6.5" stroke="url(#slg2)" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M3 16l13 6.5L29 16" stroke="url(#slg2)" stroke-width="1.8" stroke-linejoin="round"/>
+        <defs>
+          <linearGradient id="slg1" x1="3" y1="3" x2="29" y2="16"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#4f94f8"/></linearGradient>
+          <linearGradient id="slg2" x1="3" y1="16" x2="29" y2="29"><stop stop-color="#4f94f8"/><stop offset="1" stop-color="#a371f7"/></linearGradient>
+        </defs>
       </svg>
-      <div class="sb-brand">
-        <span class="sb-brand-name">Nexora</span>
-        <span class="sb-brand-sub">Support IT</span>
+      <div>
+        <div class="sb-name">Nexora</div>
+        <div class="sb-sub">Support IT</div>
+      </div>
+      <button class="sb-close" onclick="toggleSidebar()" aria-label="Close">
+        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Donut mini chart -->
+    <div class="sb-donut-wrap">
+      <svg id="donutChart" viewBox="0 0 80 80" class="donut-svg"></svg>
+      <div class="donut-center">
+        <div class="donut-pct" id="donutPct">—</div>
+        <div class="donut-lbl">resolved</div>
       </div>
     </div>
 
     <nav class="sb-nav">
-      <div class="nav-section-label">DASHBOARD</div>
-      <div class="nav-item active" onclick="setPage(0)">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      <div class="nav-label">DASHBOARD</div>
+      <button class="nav-item active" data-filter="" onclick="navClick(this,'')">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
         <span>Overview</span>
-      </div>
-
-      <div class="nav-section-label">TICKETS</div>
-      <div class="nav-item" onclick="setFilter('open');this.closest('.sb-nav').querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));this.classList.add('active')">
+      </button>
+      <div class="nav-label">TICKETS</div>
+      <button class="nav-item" data-filter="open" onclick="navClick(this,'open')">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
         <span>Open</span>
-        <span id="nav-open" class="nav-badge badge-open">—</span>
-      </div>
-      <div class="nav-item" onclick="setFilter('in_progress');this.closest('.sb-nav').querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));this.classList.add('active')">
+        <span id="nav-open" class="nbadge open">0</span>
+      </button>
+      <button class="nav-item" data-filter="in_progress" onclick="navClick(this,'in_progress')">
         <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg>
         <span>In Progress</span>
-        <span id="nav-progress" class="nav-badge badge-progress">—</span>
-      </div>
-      <div class="nav-item" onclick="setFilter('pending');this.closest('.sb-nav').querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));this.classList.add('active')">
+        <span id="nav-progress" class="nbadge progress">0</span>
+      </button>
+      <button class="nav-item" data-filter="pending" onclick="navClick(this,'pending')">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 9h4M10 15h4"/></svg>
         <span>Pending</span>
-      </div>
-      <div class="nav-item" onclick="setFilter('closed');this.closest('.sb-nav').querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));this.classList.add('active')">
+      </button>
+      <button class="nav-item" data-filter="closed" onclick="navClick(this,'closed')">
         <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         <span>Closed</span>
-      </div>
-
-      <div class="nav-section-label">SYSTEM</div>
-      <div class="nav-item" style="opacity:.45;pointer-events:none">
-        <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-        <span>Settings</span>
-      </div>
+      </button>
+      <div class="nav-label">SYSTEM</div>
+      <button class="nav-item disabled" disabled>
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 0 1 21 12a10 10 0 0 1-1.93 7.07M4.93 4.93A10 10 0 0 0 3 12a10 10 0 0 0 1.93 7.07"/></svg>
+        <span>Analytics</span>
+        <span class="nbadge" style="background:rgba(100,100,120,.3);color:#666;font-size:8px">soon</span>
+      </button>
     </nav>
 
     <div class="sb-footer">
-      <div class="sb-footer-dot online"></div>
-      <span>Live Data Feed</span>
+      <span class="pulse-dot"></span>
+      <span>Live · <span id="sb-total">—</span> tickets</span>
+      <span class="sb-ver">v2.0</span>
     </div>
   </aside>
 
-  <!-- ── MAIN CONTENT ── -->
+  <!-- MAIN -->
   <main class="main-wrap">
 
-    <!-- Top Bar -->
+    <!-- TOPBAR -->
     <header class="topbar">
       <button class="burger" onclick="toggleSidebar()" aria-label="Menu">
-        <svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h12"/></svg>
       </button>
-      <div class="topbar-title">IT Helpdesk</div>
-      <div class="topbar-actions">
+      <div class="topbar-brand">
+        <span class="topbar-title">IT Helpdesk</span>
+        <span class="topbar-date" id="topbar-date"></span>
+      </div>
+      <div class="topbar-center">
         <div class="search-wrap">
           <svg class="search-ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <input id="searchQ" type="search" placeholder="Search tickets… (⌘K)" oninput="doFilter()"/>
+          <input id="searchQ" type="search" placeholder="Search tickets, users, IDs… (⌘K)" oninput="doFilter()" autocomplete="off"/>
+          <kbd class="search-kbd">⌘K</kbd>
         </div>
+      </div>
+      <div class="topbar-right">
         <select id="catSel" onchange="doFilter()">
           <option value="">All Categories</option>
         </select>
+        <div class="topbar-avatar" title="Dashboard Admin">DA</div>
       </div>
     </header>
 
-    <!-- Stats Row -->
+    <!-- STATS GRID -->
     <section id="statsGrid" class="stats-grid"></section>
 
-    <!-- Filter Chips -->
+    <!-- CHIP ROW -->
     <div class="chip-row">
-      <span class="chip-label">Filter:</span>
-      <button class="chip active" data-status="" onclick="setChip(this,'')">All</button>
-      <button class="chip" data-status="open" onclick="setChip(this,'open')">Open</button>
-      <button class="chip" data-status="in_progress" onclick="setChip(this,'in_progress')">In Progress</button>
-      <button class="chip" data-status="pending" onclick="setChip(this,'pending')">Pending</button>
-      <button class="chip" data-status="closed" onclick="setChip(this,'closed')">Closed</button>
+      <div class="chips">
+        <button class="chip active" data-status="" onclick="setChip(this,'')">
+          <span class="chip-dot" style="background:var(--t3)"></span>All
+        </button>
+        <button class="chip" data-status="open" onclick="setChip(this,'open')">
+          <span class="chip-dot" style="background:var(--green)"></span>Open
+        </button>
+        <button class="chip" data-status="in_progress" onclick="setChip(this,'in_progress')">
+          <span class="chip-dot" style="background:var(--amber)"></span>In Progress
+        </button>
+        <button class="chip" data-status="pending" onclick="setChip(this,'pending')">
+          <span class="chip-dot" style="background:var(--violet)"></span>Pending
+        </button>
+        <button class="chip" data-status="closed" onclick="setChip(this,'closed')">
+          <span class="chip-dot" style="background:var(--blue)"></span>Closed
+        </button>
+      </div>
       <span id="resultCount" class="result-count"></span>
     </div>
 
-    <!-- Content area: ticket list + right panel -->
+    <!-- CONTENT BODY -->
     <div class="content-body">
-
-      <!-- Ticket list -->
       <section class="ticket-section">
         <div id="ticketList" class="ticket-list"></div>
         <div id="pager" class="pager"></div>
       </section>
-
-      <!-- Right panel -->
       <aside id="rightPanel" class="right-panel"></aside>
     </div>
 
-  </main><!-- /main-wrap -->
-</div><!-- /app-shell -->
+  </main>
+</div>
 
-<!-- ╔══════════════════════════════╗ -->
-<!-- ║   MOBILE BOTTOM NAV          ║ -->
-<!-- ╚══════════════════════════════╝ -->
+<!-- BOTTOM NAV (mobile) -->
 <nav class="bottom-nav">
-  <div class="bnav-item active" onclick="setPage(0)">
-    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-    <span>Dashboard</span>
-  </div>
-  <div class="bnav-item" onclick="setFilter('open')">
+  <button class="bnav-item active" onclick="bnavClick(this,'')">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+    <span>Home</span>
+  </button>
+  <button class="bnav-item" onclick="bnavClick(this,'open')">
     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
     <span>Open</span>
-  </div>
-  <div class="bnav-item" onclick="setFilter('in_progress')">
+  </button>
+  <button class="bnav-item" onclick="bnavClick(this,'in_progress')">
     <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg>
     <span>Progress</span>
-  </div>
-  <div class="bnav-item" onclick="setFilter('closed')">
+  </button>
+  <button class="bnav-item" onclick="bnavClick(this,'pending')">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 9h4M10 15h4"/></svg>
+    <span>Pending</span>
+  </button>
+  <button class="bnav-item" onclick="bnavClick(this,'closed')">
     <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
     <span>Closed</span>
-  </div>
+  </button>
 </nav>
 
-<!-- ╔══════════════════════════════╗ -->
-<!-- ║   DETAIL DRAWER OVERLAY      ║ -->
-<!-- ╚══════════════════════════════╝ -->
+<!-- DETAIL DRAWER -->
 <div id="detail-overlay" onclick="closeDetail(event)">
-  <div class="detail-drawer">
+  <div class="detail-drawer" id="detailDrawer">
     <header class="drawer-header">
-      <span class="drawer-title">Ticket Detail</span>
-      <button class="drawer-close" onclick="document.getElementById('detail-overlay').classList.remove('show');state.selectedId=null;renderList()" aria-label="Close">✕</button>
+      <div class="drawer-header-left">
+        <svg viewBox="0 0 24 24" class="drawer-header-ico"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        <span class="drawer-title">Ticket Detail</span>
+      </div>
+      <button class="drawer-close" onclick="document.getElementById('detail-overlay').classList.remove('show');state.selectedId=null;renderList()" aria-label="Close">
+        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
     </header>
     <div id="drawerBody" class="drawer-body"></div>
   </div>
